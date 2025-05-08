@@ -60,3 +60,12 @@ If you want to learn more about building native executables, please consult <htt
 Easily start your REST Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+
+
+
+#### Extracting private key from PKCS#12 (Public Key Cryptography Standards) keystore
+1. openssl pkcs12 -in fraud-transaction-detection-api-sandbox-signing.p12 -nocerts -out private.key
+2. type passphrase 
+#### Remove passphrase form key in order to use it with postman
+1. openssl rsa -in private.key -out private_key_without_passphrase.key
+2. type passphrase

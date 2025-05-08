@@ -13,7 +13,7 @@ public class GlobalExceptionHandler extends ExceptionHandler<Throwable> {
     }
 
     @Override
-    public Response.Status getStatus() {
+    public Response.Status getStatus(Throwable exception) {
         return Response.Status.INTERNAL_SERVER_ERROR;
     }
 

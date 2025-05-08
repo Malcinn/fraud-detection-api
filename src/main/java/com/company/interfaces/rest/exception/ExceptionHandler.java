@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @Getter
-public abstract class ExceptionHandler <T extends Throwable> implements ExceptionMapper<T> {
+public abstract class ExceptionHandler<T extends Throwable> implements ExceptionMapper<T> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionHandler.class);
 
@@ -24,11 +24,11 @@ public abstract class ExceptionHandler <T extends Throwable> implements Exceptio
 
     @Override
     public Response toResponse(T exception) {
-        LOGGER.error("Exception occurred on: {} {}, message: {}", request.getMethod(),
+        LOGGER.error("Exception {} occurred on: {} {}, message: {}", exception.getClass(), request.getMethod(),
                 uriInfo.getPath(), exception.getMessage());
-        return Response.status(getStatus())
+        return Response.status(getStatus(exception))
                 .entity(ErrorResponseDto.builder()
-                        .status(getStatus().getReasonPhrase())
+                        .status(getStatus(exception).getReasonPhrase())
                         .date(LocalDateTime.now())
                         .path(uriInfo.getPath())
                         .message(getMessage(exception))
@@ -36,7 +36,8 @@ public abstract class ExceptionHandler <T extends Throwable> implements Exceptio
                 .build();
     }
 
-    public abstract Response.Status getStatus();
+    public abstract Response.Status getStatus(T exception);
 
     public abstract Object getMessage(T exception);
+
 }

@@ -1,5 +1,6 @@
 package com.company.application;
 
+import com.company.application.dto.TransactionAssessment;
 import com.company.interfaces.rest.dto.TransactionDto;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -7,8 +8,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class DepositTransferFraudTransactionAssessmentService implements FraudTransactionAssessmentService {
 
     @Override
-    public String processAssessment(TransactionDto transaction) {
-        return "";
+    public TransactionAssessment processAssessment(TransactionDto transaction) {
+        return null;
     }
 
     @Override

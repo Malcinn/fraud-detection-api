@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class CardDto {
+public class AccountRange {
 
     @NotBlank(message = "Bin Number must not be blank")
     @Pattern(regexp = "[0-9]{6,8}", message = "Bin number - the first 6 to 8 digits of a card number")

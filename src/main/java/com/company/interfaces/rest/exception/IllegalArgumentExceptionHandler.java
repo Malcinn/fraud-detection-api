@@ -13,7 +13,7 @@ public class IllegalArgumentExceptionHandler extends ExceptionHandler<IllegalArg
     }
 
     @Override
-    public Response.Status getStatus() {
+    public Response.Status getStatus(IllegalArgumentException exception) {
         return Response.Status.BAD_REQUEST;
     }
 

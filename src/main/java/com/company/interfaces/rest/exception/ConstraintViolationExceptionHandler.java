@@ -14,7 +14,7 @@ public class ConstraintViolationExceptionHandler extends ExceptionHandler<Constr
     }
 
     @Override
-    public Response.Status getStatus() {
+    public Response.Status getStatus(ConstraintViolationException exception) {
         return Response.Status.BAD_REQUEST;
     }
 

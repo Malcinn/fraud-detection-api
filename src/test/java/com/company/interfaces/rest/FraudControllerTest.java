@@ -2,12 +2,13 @@ package com.company.interfaces.rest;
 
 import com.company.application.FraudTransactionAssessmentResolver;
 import com.company.application.FraudTransactionAssessmentService;
+import com.company.application.dto.TransactionAssessment;
+import com.company.interfaces.rest.dto.AccountRange;
 import com.company.interfaces.rest.dto.TransactionDto;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.math.BigDecimal;
@@ -32,7 +33,7 @@ public class FraudControllerTest {
         Mockito.when(fraudTransactionAssessmentResolver.getService("TEST"))
                 .thenReturn(fraudTransactionAssessmentService);
         Mockito.when(fraudTransactionAssessmentService.processAssessment(Mockito.mock(TransactionDto.class)))
-                        .thenReturn("TOO_HIGH_AMOUNT_TRANSACTION");
+                .thenReturn(TransactionAssessment.builder().score(100).assessment("TOO_HIGH_AMOUNT_TRANSACTION").build());
 
         given()
                 .when()
@@ -80,5 +81,4 @@ public class FraudControllerTest {
                 .then()
                 .statusCode(500);
     }
-
 }
