@@ -1,6 +1,7 @@
 package com.company.application;
 
 import com.company.application.exception.MastercardBinLookupApiException;
+import io.quarkus.cache.CacheResult;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Instance;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class DefaultMastercardBinLookupApi implements MastercardBinLookupApi {
 
     private final Instance<BinLookupApi> binLookupApiProvider;
 
+    @CacheResult(cacheName = "mastercard-lookup-api-account-searches-cache")
     @Override
     public List<BinResource> searchBy(String binNumber) {
         SearchByAccountRange searchByAccountRange = new SearchByAccountRange();
@@ -32,7 +34,8 @@ public class DefaultMastercardBinLookupApi implements MastercardBinLookupApi {
             return binLookupApiProvider.get().searchByAccountRangeResources(searchByAccountRange);
         } catch (ApiException e) {
             LOGGER.error("Exception when calling BinLookupApi#searchByAccountRangeResources");
-            throw new MastercardBinLookupApiException(e.getMessage(), e, e.getCode(), e.getResponseHeaders(), e.getResponseBody());
+            throw new MastercardBinLookupApiException("Exception occurred when calling e, message: "
+                    + e.getMessage(), e, e.getCode(), e.getResponseHeaders(), e.getResponseBody());
         }
     }
 
@@ -42,7 +45,8 @@ public class DefaultMastercardBinLookupApi implements MastercardBinLookupApi {
             return binLookupApiProvider.get().getBinResources(searchCriteria, page, size, sort);
         } catch (ApiException e) {
             LOGGER.error("Exception when calling BinLookupApi#getBinResources");
-            throw new MastercardBinLookupApiException(e.getMessage(), e, e.getCode(), e.getResponseHeaders(), e.getResponseBody());
+            throw new MastercardBinLookupApiException("Exception occurred when calling external service, message: "
+                    + e.getMessage(), e, e.getCode(), e.getResponseHeaders(), e.getResponseBody());
         }
     }
 
