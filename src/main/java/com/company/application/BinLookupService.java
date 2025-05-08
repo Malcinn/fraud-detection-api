@@ -2,7 +2,9 @@ package com.company.application;
 
 import com.company.application.data.BinData;
 
+import java.util.List;
+
 public interface BinLookupService {
 
-    BinData getBinData(String binNumber);
+    List<BinData> getBinData(String binNumber);
 }

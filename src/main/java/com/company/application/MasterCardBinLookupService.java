@@ -30,17 +30,10 @@ public class MasterCardBinLookupService implements BinLookupService {
     private final Mapper<BinResource, BinData> dataMapper;
 
     @Override
-    public BinData getBinData(String binNumber) {
-        List<BinResource> result = getRawBinData(binNumber);
-        if (result.size() > 1){
-            throw new ResourceNotFoundException("asdasd");
-        }
-        return dataMapper.map(result.getFirst());
-    }
-
-    public List<BinResource> getRawBinData(String binNumber){
-        List<BinResource> result = binLookupApi.searchBy(binNumber);
-        return null;
+    public List<BinData> getBinData(String binNumber) {
+        return binLookupApi.searchBy(binNumber).stream()
+                .map(dataMapper::map)
+                .toList();
     }
 
 }

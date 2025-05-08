@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 public class TransactionDto {
 
     @NotBlank(message = "Bin Number must not be blank")
-    @Pattern(regexp = "[0-9]{6,8}", message = "Bin number - the first 6 to 8 digits of a card number")
+    @Pattern(regexp = "[0-9]{6,11}", message = "Bin number - the first 6 to 8 digits of a card number")
     private String binNumber;
 
     @NotNull(message = "Amount must not be null")

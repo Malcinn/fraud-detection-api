@@ -24,7 +24,7 @@ public class BinDetailsControllerTest {
         given()
                 .when()
                 .contentType(ContentType.JSON)
-                .body(new AccountRange("0123456789"))
+                .body(new AccountRange("000123456789"))
                 .post("/v1/bin-details/mastercard")
                 .then()
                 .statusCode(400);
