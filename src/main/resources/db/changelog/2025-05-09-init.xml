@@ -1,0 +1,30 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet author="marcin.kowalczyk1992@gmail.com" id="1">
+        <createTable tableName="bin_resources">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="low_account_range" type="INT">
+            </column>
+            <column name="high_account_range" type="INT">
+            </column>
+            <column name="bin_num" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bin_length" type="INT">
+            </column>
+            <column name="customer_name" type="VARCHAR(255)">
+            </column>
+            <column name="country_alpha_3" type="VARCHAR(3)">
+            </column>
+        </createTable>
+        <createIndex tableName="bin_resources" indexName="bin_resources_bin_num_index">
+            <column name="bin_num"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

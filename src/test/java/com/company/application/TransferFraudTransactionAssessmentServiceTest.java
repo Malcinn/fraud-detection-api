@@ -3,10 +3,9 @@ package com.company.application;
 import com.company.application.data.BinData;
 import com.company.application.dto.TransactionAssessment;
 import com.company.interfaces.rest.dto.TransactionDto;
-import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
-import jakarta.inject.Inject;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -17,11 +16,15 @@ import java.util.List;
 @QuarkusTest
 public class TransferFraudTransactionAssessmentServiceTest {
 
-    @Inject
     private TransferFraudTransactionAssessmentService underTests;
 
-    @InjectMock
     private BinLookupService binLookupService;
+
+    @BeforeEach
+    public void setup() {
+        binLookupService = Mockito.mock(BinLookupService.class);
+        underTests = new TransferFraudTransactionAssessmentService(binLookupService);
+    }
 
     @Test
     public void processAssessmentTransactionBelow1000() {

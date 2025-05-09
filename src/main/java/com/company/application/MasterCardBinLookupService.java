@@ -1,25 +1,17 @@
 package com.company.application;
 
 import com.company.application.data.BinData;
-import com.company.application.exception.ResourceNotFoundException;
-import com.company.interfaces.rest.exception.ExceptionHandler;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Named;
 import lombok.RequiredArgsConstructor;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.api.BinLookupApi;
 import org.openapitools.client.model.BinResource;
-import org.openapitools.client.model.BinResourcePage;
-import org.openapitools.client.model.SearchByAccountRange;
-import org.openapitools.client.model.SearchCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 
 @ApplicationScoped
+@Named("masterCardBinLookupService")
 @RequiredArgsConstructor
 public class MasterCardBinLookupService implements BinLookupService {
 

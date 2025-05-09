@@ -4,14 +4,14 @@ import com.company.application.data.BinData;
 import com.company.application.dto.TransactionAssessment;
 import com.company.interfaces.rest.dto.TransactionDto;
 import jakarta.enterprise.context.ApplicationScoped;
-import lombok.RequiredArgsConstructor;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @ApplicationScoped
-@RequiredArgsConstructor
 public class TransferFraudTransactionAssessmentService implements FraudTransactionAssessmentService {
 
     private static final String LOW_RISK_TRANSACTION = "LOW_RISK_TRANSACTION_AMOUNT_BELOW_1000";
@@ -21,6 +21,12 @@ public class TransferFraudTransactionAssessmentService implements FraudTransacti
     private static final String HIGH_RISK_TRANSACTION_NO_BIN_DATA_FAKE_OR_FRAUD = "HIGH_RISK_TRANSACTION_NO_BIN_DATA_FAKE_OR_FRAUD";
 
     private final BinLookupService binLookupService;
+
+    @Inject
+    public TransferFraudTransactionAssessmentService(@Named("masterCardBinLookupServiceWithFallback")
+                                                     BinLookupService binLookupService) {
+        this.binLookupService = binLookupService;
+    }
 
     @Override
     public TransactionAssessment processAssessment(TransactionDto transaction) {

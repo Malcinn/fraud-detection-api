@@ -5,7 +5,6 @@ import jakarta.ws.rs.core.Request;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 import jakarta.ws.rs.ext.Provider;
-import org.openapitools.client.ApiException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
