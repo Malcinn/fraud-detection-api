@@ -2,6 +2,7 @@ package com.company.interfaces.rest;
 
 import com.company.application.BinResourcesSynchronizationService;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -12,6 +13,7 @@ import jakarta.ws.rs.core.Response;
 public class SynchronizationController {
 
     @Inject
+    @Named("mastercardSynchronizationDispatcher")
     private BinResourcesSynchronizationService service;
 
     @Path("/binResource")

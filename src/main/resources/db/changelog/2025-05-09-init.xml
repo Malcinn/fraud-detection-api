@@ -6,7 +6,7 @@
 
     <changeSet author="marcin.kowalczyk1992@gmail.com" id="1">
         <createTable tableName="bin_resources">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="low_account_range" type="INT">

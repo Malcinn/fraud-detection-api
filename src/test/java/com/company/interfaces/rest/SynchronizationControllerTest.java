@@ -3,6 +3,7 @@ package com.company.interfaces.rest;
 import com.company.application.BinResourcesSynchronizationService;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
+import jakarta.inject.Named;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -13,6 +14,7 @@ import static io.restassured.RestAssured.given;
 public class SynchronizationControllerTest {
 
     @InjectMock
+    @Named("mastercardBinResourcesSynchronizationService")
     private BinResourcesSynchronizationService binResourcesSynchronizationService;
 
     @Test

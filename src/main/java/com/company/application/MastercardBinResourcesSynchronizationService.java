@@ -4,6 +4,7 @@ import com.company.application.data.Mapper;
 import com.company.domain.BinResource;
 import com.company.domain.BinResourceRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
 import jakarta.transaction.SystemException;
 import jakarta.transaction.UserTransaction;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.Optional;
 
 @ApplicationScoped
 @RequiredArgsConstructor
+@Named("mastercardBinResourcesSynchronizationService")
 public class MastercardBinResourcesSynchronizationService implements BinResourcesSynchronizationService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MastercardBinResourcesSynchronizationService.class);
@@ -42,6 +44,8 @@ public class MastercardBinResourcesSynchronizationService implements BinResource
         do {
             BinResourcePage resourcePage = mastercardBinLookupApi.getBinResources(searchCriteria, page, size, sort);
             totalPages = Objects.nonNull(resourcePage.getTotalPages()) ? resourcePage.getTotalPages() : 1;
+            LOGGER.info("Processing page {} of {} with {} bin resources", page, totalPages, resourcePage.getItems().size());
+
             if (CollectionUtils.isNotEmpty(resourcePage.getItems())) {
                 resourcePage.getItems().forEach(binResource -> {
                     try {
@@ -50,6 +54,7 @@ public class MastercardBinResourcesSynchronizationService implements BinResource
                         userTransaction.commit();
                     } catch (Exception e) {
                         LOGGER.error("Error occurred while processing bin resource: {}, message: {}", binResource.getBinNum(), e.getMessage());
+                        LOGGER.error(binResource.toJson());
                         try {
                             userTransaction.rollback();
                         } catch (SystemException rollbackEx) {

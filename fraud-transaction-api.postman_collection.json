@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "fd421e35-4f3f-4bcc-b2e4-d9b973772792",
+		"name": "fraud-transaction-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33300636"
+	},
+	"item": [
+		{
+			"name": "transaction-assessment",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"binNumber\":\"225108\",\n    \"amount\":\"456.87\",\n    \"currency\":\"LKA\",\n    \"countryAlpha3\":\"LKA\",\n    \"type\":\"TRANSFER\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/fraud/transaction-assessment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fraud",
+						"transaction-assessment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bin-details-mastercard",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"binNumber\":\"225108\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/bin-details/mastercard",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"bin-details",
+						"mastercard"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "synchronization",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/synchronization/binResource",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"synchronization",
+						"binResource"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
