@@ -26,6 +26,9 @@ public class MastercardBinResourcesSynchronizationService implements BinResource
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MastercardBinResourcesSynchronizationService.class);
 
+    private static final String DEFAULT_SORT = "-lowAccountRange";
+
+    private static final int DEFAULT_BIN_RESULTS_PER_PAGE = 5000;
     private final MastercardBinLookupApi mastercardBinLookupApi;
 
     private final BinResourceRepository binResourceRepository;
@@ -37,14 +40,12 @@ public class MastercardBinResourcesSynchronizationService implements BinResource
     @Override
     public void synchronize() {
         List<SearchCriteria> searchCriteria = Collections.emptyList();
-        int page = 1;
+        int currentPage = 1;
         int totalPages = 1;
-        int size = 5000;
-        String sort = "-lowAccountRange";
         do {
-            BinResourcePage resourcePage = mastercardBinLookupApi.getBinResources(searchCriteria, page, size, sort);
+            BinResourcePage resourcePage = mastercardBinLookupApi.getBinResources(searchCriteria, currentPage, DEFAULT_BIN_RESULTS_PER_PAGE, DEFAULT_SORT);
             totalPages = Objects.nonNull(resourcePage.getTotalPages()) ? resourcePage.getTotalPages() : 1;
-            LOGGER.info("Processing page {} of {} with {} bin resources", page, totalPages, resourcePage.getItems().size());
+            LOGGER.info("Processing page {} of {} with {} bin resources", currentPage, totalPages, resourcePage.getItems().size());
 
             if (CollectionUtils.isNotEmpty(resourcePage.getItems())) {
                 resourcePage.getItems().forEach(binResource -> {
@@ -63,7 +64,7 @@ public class MastercardBinResourcesSynchronizationService implements BinResource
                     }
                 });
             }
-        } while (++page <= totalPages);
+        } while (++currentPage <= totalPages);
     }
 
     private void createOrUpdate(org.openapitools.client.model.BinResource binResource) {
