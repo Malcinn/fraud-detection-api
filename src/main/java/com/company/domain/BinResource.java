@@ -1,8 +1,11 @@
 package com.company.domain;
 
-import io.quarkus.arc.All;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NamedQuery(
         name = "BinResource.findAllByBinNum",

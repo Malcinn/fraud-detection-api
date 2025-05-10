@@ -6,10 +6,11 @@ Application perform transaction assessment base on:
 2. predefined risk assessment, different for each transaction type.
 
 ## How to use application
-First you have to obtain .evn file with sensitive credentials settings,
-then run following command in bash shell: ``export $(cat .env | xargs)`` </br>
-In order to start up application in development mode with live reload, use following command: ``./mvnw quarkus:dev`` </br>
-In the main directory you can find a postman collection with predefined api requests to communicate with service.
+1. Before you start, please make sure that you received .evn file(with sensitive credentials data) and postman collection.
+2. Import environment variables (.env file) execute following command:  ``export $(cat .env | xargs)``
+3. Start up application in development mode with live reload, use following command: ``./mvnw quarkus:dev`` </br>
+
+Postman collection contains predefined api requests to communicate with service.
 1. /api/v1/fraud/transaction-assessment - perform transaction assessment
 2. /api/v1/bin-details/mastercard - is for checking the response of the Mastercard Bin Lookup API (/bin-ranges/account-searches)
 3. /api/v1/synchronization/binResource - is for triggering synchronization of local database BinResource data with Mastercard Bin Lookup API (/bin-ranges)
