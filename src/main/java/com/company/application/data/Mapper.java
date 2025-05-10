@@ -1,4 +1,4 @@
-package com.company.application;
+package com.company.application.data;
 
 public interface Mapper<S, T> {
 

@@ -10,8 +10,10 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="low_account_range" type="INT">
+                <constraints nullable="false"/>
             </column>
             <column name="high_account_range" type="INT">
+                <constraints nullable="false"/>
             </column>
             <column name="bin_num" type="INT">
                 <constraints nullable="false"/>
@@ -23,6 +25,9 @@
             <column name="country_alpha_3" type="VARCHAR(3)">
             </column>
         </createTable>
+        <addUniqueConstraint tableName="bin_resources"
+                             columnNames="bin_num, low_account_range, high_account_range"
+                             constraintName="unique_bin_resources_bin_num_ranges"/>
         <createIndex tableName="bin_resources" indexName="bin_resources_bin_num_index">
             <column name="bin_num"/>
         </createIndex>

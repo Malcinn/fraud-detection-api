@@ -25,7 +25,7 @@ public class BinDetailsControllerTest {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(new AccountRange("000123456789"))
-                .post("/v1/bin-details/mastercard")
+                .post("/api/v1/bin-details/mastercard")
                 .then()
                 .statusCode(400);
     }
@@ -38,7 +38,7 @@ public class BinDetailsControllerTest {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(new AccountRange("123456"))
-                .post("/v1/bin-details/mastercard")
+                .post("/api/v1/bin-details/mastercard")
                 .then()
                 .statusCode(500);
     }
@@ -53,7 +53,7 @@ public class BinDetailsControllerTest {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(new AccountRange("123456"))
-                .post("/v1/bin-details/mastercard")
+                .post("/api/v1/bin-details/mastercard")
                 .then()
                 .statusCode(200);
     }

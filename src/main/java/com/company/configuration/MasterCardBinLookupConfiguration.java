@@ -1,7 +1,7 @@
 package com.company.configuration;
 
-import com.company.application.Mapper;
 import com.company.application.data.BinData;
+import com.company.application.data.Mapper;
 import com.company.domain.BinResource;
 import com.mastercard.developer.interceptors.OkHttpOAuth1Interceptor;
 import com.mastercard.developer.utils.AuthenticationUtils;
@@ -20,6 +20,7 @@ import java.security.PrivateKey;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.util.MissingResourceException;
+import java.util.Objects;
 import java.util.Optional;
 
 @ApplicationScoped
@@ -72,6 +73,19 @@ public class MasterCardBinLookupConfiguration {
         return (BinResource source) -> BinData.builder().binNum(source.getBinNum().toString())
                 .countryAlpha3(Optional.ofNullable(source.getCountryAlpha3()).orElseThrow(() -> new MissingResourceException("Missing country resource",
                         BinResourceCountry.class.getName(), "country")))
+                .build();
+    }
+
+    @Produces
+    @ApplicationScoped
+    public Mapper<org.openapitools.client.model.BinResource, BinResource> apiBinResourceDomainBinResourceMapper() {
+        return (org.openapitools.client.model.BinResource source) -> BinResource.builder()
+                .lowAccountRange(source.getLowAccountRange())
+                .highAccountRange(source.getHighAccountRange())
+                .binNum(Objects.nonNull(source.getBinNum()) ? Integer.valueOf(source.getBinNum()) : null)
+                .binLength(source.getBinLength())
+                .customerName(source.getCustomerName())
+                .countryAlpha3(Objects.nonNull(source.getCountry()) ? source.getCountry().getAlpha3() : "")
                 .build();
     }
 }

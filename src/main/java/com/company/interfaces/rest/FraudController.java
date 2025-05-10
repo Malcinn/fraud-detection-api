@@ -18,7 +18,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 
-@Path("/v1/fraud")
+@Path("/api/v1/fraud")
 @ApplicationScoped
 public class FraudController {
 

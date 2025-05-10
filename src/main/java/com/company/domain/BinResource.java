@@ -1,19 +1,24 @@
 package com.company.domain;
 
+import io.quarkus.arc.All;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NamedQuery(
         name = "BinResource.findAllByBinNum",
         query = "FROM BinResource b WHERE b.binNum= :binNum"
 )
+@NamedQuery(
+        name = "BinResource.findByUniqueParams",
+        query = "FROM BinResource b WHERE b.binNum= :binNum and b.lowAccountRange= :lowAccountRange and b.highAccountRange= :highAccountRange"
+)
 @Entity
 @Table(name = "bin_resources")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class BinResource {
 
     @Id
@@ -38,4 +43,9 @@ public class BinResource {
     @Column(name = "country_alpha_3")
     private String countryAlpha3;
 
+    public void updateFrom(BinResource source) {
+        this.setBinLength(source.binLength);
+        this.setCustomerName(source.getCustomerName());
+        this.setCountryAlpha3(source.getCountryAlpha3());
+    }
 }

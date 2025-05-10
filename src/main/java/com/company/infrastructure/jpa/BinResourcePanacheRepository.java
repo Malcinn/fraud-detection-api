@@ -7,6 +7,7 @@ import io.quarkus.panache.common.Parameters;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 public class BinResourcePanacheRepository implements BinResourceRepository, PanacheRepository<BinResource> {
@@ -16,8 +17,15 @@ public class BinResourcePanacheRepository implements BinResourceRepository, Pana
         return this.find("#BinResource.findAllByBinNum", Parameters.with("binNum", binNumber)).list();
     }
 
+    public Optional<BinResource> findByUniqueParams(Integer binNumber, Integer lowAccountRange, Integer highAccountRange) {
+        return this.find("#BinResource.findByUniqueParams", Parameters.with("binNum", binNumber)
+                .and("lowAccountRange", lowAccountRange)
+                .and("highAccountRange", highAccountRange)).firstResultOptional();
+    }
+
     @Override
     public void save(BinResource entity) {
-        this.persist(new BinResource());
+        this.persist(entity);
     }
+
 }

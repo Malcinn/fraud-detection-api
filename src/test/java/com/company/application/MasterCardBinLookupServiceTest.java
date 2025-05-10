@@ -1,6 +1,7 @@
 package com.company.application;
 
 import com.company.application.data.BinData;
+import com.company.application.data.Mapper;
 import com.company.application.exception.MastercardBinLookupApiException;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;

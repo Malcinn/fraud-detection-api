@@ -73,6 +73,10 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-liquibase</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-scheduler</artifactId>
+        </dependency>
         <!-- Open api dependencies BEGIN -->
         <dependency>
             <groupId>org.openapitools</groupId>

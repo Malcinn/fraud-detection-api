@@ -43,7 +43,7 @@ public class FraudControllerTest {
                         "PLN",
                         "POL",
                         "TEST"))
-                .post("/v1/fraud/transaction-assessment")
+                .post("/api/v1/fraud/transaction-assessment")
                 .then()
                 .statusCode(200);
     }
@@ -61,7 +61,7 @@ public class FraudControllerTest {
                         "PLN",
                         "POL",
                         "TEST"))
-                .post("/v1/fraud/transaction-assessment")
+                .post("/api/v1/fraud/transaction-assessment")
                 .then()
                 .statusCode(400);
     }
@@ -77,7 +77,7 @@ public class FraudControllerTest {
                         "PLN",
                         "POL",
                         "TEST"))
-                .post("/v1/fraud/transaction-assessment")
+                .post("/api/v1/fraud/transaction-assessment")
                 .then()
                 .statusCode(500);
     }

@@ -1,6 +1,7 @@
 package com.company.application;
 
 import com.company.application.data.BinData;
+import com.company.application.data.Mapper;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
 import lombok.RequiredArgsConstructor;

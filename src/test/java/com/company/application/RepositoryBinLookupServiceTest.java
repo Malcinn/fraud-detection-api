@@ -1,7 +1,7 @@
 package com.company.application;
 
 import com.company.application.data.BinData;
-import com.company.application.exception.MastercardBinLookupApiException;
+import com.company.application.data.Mapper;
 import com.company.domain.BinResource;
 import com.company.domain.BinResourceRepository;
 import io.quarkus.panache.common.exception.PanacheQueryException;

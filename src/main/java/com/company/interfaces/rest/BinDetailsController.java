@@ -13,7 +13,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @ApplicationScoped
-@Path("/v1/bin-details")
+@Path("/api/v1/bin-details")
 public class BinDetailsController {
 
     @Inject
