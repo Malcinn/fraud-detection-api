@@ -1,5 +1,7 @@
 package com.company.interfaces.rest.dto;
 
+import com.company.interfaces.rest.jackson.LocaleAwareBigDecimalDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -21,6 +23,7 @@ public class TransactionDto {
     private String binNumber;
 
     @NotNull(message = "Amount must not be null")
+    @JsonDeserialize(using = LocaleAwareBigDecimalDeserializer.class)
     @PositiveOrZero
     private BigDecimal amount;
 
