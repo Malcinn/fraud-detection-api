@@ -4,6 +4,7 @@ import com.company.application.MastercardBinLookupApi;
 import com.company.interfaces.rest.dto.AccountRange;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.security.TestSecurity;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -20,6 +21,7 @@ public class BinDetailsControllerTest {
     private MastercardBinLookupApi mastercardBinLookupApi;
 
     @Test
+    @TestSecurity(user = "api-user")
     public void binDetailsShouldShouldReturn400IfBinNumberHasWrongFormat() {
         given()
                 .when()
@@ -31,6 +33,7 @@ public class BinDetailsControllerTest {
     }
 
     @Test
+    @TestSecurity(user = "api-user")
     public void binDetailsShould500WhenExceptionWasThrownInServiceLayer() {
         Mockito.when(mastercardBinLookupApi.searchBy(Mockito.anyString())).thenThrow(NullPointerException.class);
 
@@ -44,6 +47,7 @@ public class BinDetailsControllerTest {
     }
 
     @Test
+    @TestSecurity(user = "api-user")
     public void binDetailsShould200OK() {
         BinResource binResource = new BinResource();
         binResource.setBinNum("123456");

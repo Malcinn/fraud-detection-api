@@ -45,24 +45,26 @@ public class MastercardBinResourcesSynchronizationService implements BinResource
         do {
             BinResourcePage resourcePage = mastercardBinLookupApi.getBinResources(searchCriteria, currentPage, DEFAULT_BIN_RESULTS_PER_PAGE, DEFAULT_SORT);
             totalPages = Objects.nonNull(resourcePage.getTotalPages()) ? resourcePage.getTotalPages() : 1;
-            LOGGER.info("Processing page {} of {} with {} bin resources", currentPage, totalPages, resourcePage.getItems().size());
-
             if (CollectionUtils.isNotEmpty(resourcePage.getItems())) {
-                resourcePage.getItems().forEach(binResource -> {
-                    try {
-                        userTransaction.begin();
-                        createOrUpdate(binResource);
-                        userTransaction.commit();
-                    } catch (Exception e) {
-                        LOGGER.error("Error occurred while processing bin resource: {}, message: {}", binResource.getBinNum(), e.getMessage());
-                        LOGGER.error(binResource.toJson());
+                LOGGER.info("Processing page {} of {} with {} bin resources", currentPage, totalPages, resourcePage.getItems().size());
+
+                if (CollectionUtils.isNotEmpty(resourcePage.getItems())) {
+                    resourcePage.getItems().forEach(binResource -> {
                         try {
-                            userTransaction.rollback();
-                        } catch (SystemException rollbackEx) {
-                            LOGGER.error("Rollback failed for bin resource: {}, message: {}", binResource.getBinNum(), rollbackEx.getMessage(), rollbackEx);
+                            userTransaction.begin();
+                            createOrUpdate(binResource);
+                            userTransaction.commit();
+                        } catch (Exception e) {
+                            LOGGER.error("Error occurred while processing bin resource: {}, message: {}", binResource.getBinNum(), e.getMessage());
+                            LOGGER.error(binResource.toJson());
+                            try {
+                                userTransaction.rollback();
+                            } catch (SystemException rollbackEx) {
+                                LOGGER.error("Rollback failed for bin resource: {}, message: {}", binResource.getBinNum(), rollbackEx.getMessage(), rollbackEx);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         } while (++currentPage <= totalPages);
     }

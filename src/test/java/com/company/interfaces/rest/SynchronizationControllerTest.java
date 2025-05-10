@@ -3,6 +3,7 @@ package com.company.interfaces.rest;
 import com.company.application.BinResourcesSynchronizationService;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.security.TestSecurity;
 import jakarta.inject.Named;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,7 @@ public class SynchronizationControllerTest {
     private BinResourcesSynchronizationService binResourcesSynchronizationService;
 
     @Test
+    @TestSecurity(user = "api-user")
     public void shouldReturn200OkWhenSynchronizationTriggeredSuccessfully() {
         String responseBody = given()
                 .when()
