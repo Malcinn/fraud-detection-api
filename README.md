@@ -7,10 +7,19 @@ Application perform transaction assessment base on:
 
 ## How to use application
 In order to start up application in development mode with live reload, use following command: ``./mvnw quarkus:dev`` </br>
-In the main directory you can find a postam collection with predefined api requests to communicate with service.
+In the main directory you can find a postman collection with predefined api requests to communicate with service.
 1. /api/v1/fraud/transaction-assessment - perform transaction assessment
 2. /api/v1/bin-details/mastercard - is for checking the response of the Mastercard Bin Lookup API (/bin-ranges/account-searches)
 3. /api/v1/synchronization/binResource - is for triggering synchronization of local database BinResource data with Mastercard Bin Lookup API (/bin-ranges)
+
+All endpoints are secured with OAuth2.0 Client credentials flow </br>
+Before you start consuming API first you have to authorize your requests, to do so:
+1. Go to fraud-transaction-api postman collection 
+2. Click on Authorization Tab
+3. Once you there scroll down to the bottom of the page, and click on "Get New Access Token" button. Do not change any configuration details here.
+4. After that you should be able to see pop up window with following information "Authentication complete", click "Proceed" or vait 5 second
+5. On the next popup window, click on the orange(there is only one orange button) button "Use Token"
+6. From now on, to all of our requests, in this collection, Authorization header wth valid JWT token will be added automatically.
 
 After application is up and running you can perform synchronization in order to ensure that bin data will be available even
 when there is no connection with Mastercard Bin Lookup API. </br>
