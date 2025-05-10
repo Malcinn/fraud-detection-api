@@ -1,7 +1,24 @@
 # fraud-detection-api
 
+## Application goal
+Application perform transaction assessment base on:
+1. MasterCard Bin Lookup API
+2. predefined risk assessment, different for each transaction type.
+
+## How to use application
+In order to start up application in development mode with live reload, use following command: ``./mvnw quarkus:dev`` </br>
+In the main directory you can find a postam collection with predefined api requests to communicate with service.
+1. /api/v1/fraud/transaction-assessment - perform transaction assessment
+2. /api/v1/bin-details/mastercard - is for checking the response of the Mastercard Bin Lookup API (/bin-ranges/account-searches)
+3. /api/v1/synchronization/binResource - is for triggering synchronization of local database BinResource data with Mastercard Bin Lookup API (/bin-ranges)
+
+After application is up and running you can perform synchronization in order to ensure that bin data will be available even
+when there is no connection with Mastercard Bin Lookup API. </br>
+
+# Dev side notes
+
 ## Development environment setup
-1. Install MySql
+1. Install MySql or use H2 database
 2. Log into mysql console and create database and user or use this script as an init script with docker container
 ````
 CREATE USER fraud-db-user WITH ENCRYPTED PASSWORD 'fraud-db-password';
@@ -11,7 +28,6 @@ GRANT ALL PRIVILEGES ON DATABASE fraud-transaction-db TO fraud-db-user;
 3. You can now start up development environment using ``./mvnw quarkus:dev``
 
 
-# Side notes
 ### In order to work with Mastercard Bin Lookup API I had to:
 1. Create developer account
 2. Create project with Bin Lookup API access
@@ -30,19 +46,8 @@ Remove passphrase form key in order to use it with postman
 2. type passphrase
 
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
 
-## Running the application in dev mode
-
-You can run your application in dev mode that enables live coding using:
-
-```shell script
-./mvnw quarkus:dev
-```
-
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
 
 ## Packaging and running the application
 
