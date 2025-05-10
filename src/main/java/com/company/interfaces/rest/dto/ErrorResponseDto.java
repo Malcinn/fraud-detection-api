@@ -17,5 +17,6 @@ public class ErrorResponseDto {
     private Object message;
     private String path;
     private LocalDateTime date;
+    private String requestId;
 
 }

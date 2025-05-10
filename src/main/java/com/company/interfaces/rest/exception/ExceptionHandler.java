@@ -1,9 +1,7 @@
 package com.company.interfaces.rest.exception;
 
 import com.company.interfaces.rest.dto.ErrorResponseDto;
-import jakarta.ws.rs.core.Request;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriInfo;
+import jakarta.ws.rs.core.*;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +20,8 @@ public abstract class ExceptionHandler<T extends Throwable> implements Exception
 
     private final Request request;
 
+    private final HttpHeaders headers;
+
     @Override
     public Response toResponse(T exception) {
         LOGGER.error("Exception {} occurred on: {} {}, message: {}", exception.getClass(), request.getMethod(),
@@ -32,6 +32,7 @@ public abstract class ExceptionHandler<T extends Throwable> implements Exception
                         .date(LocalDateTime.now())
                         .path(uriInfo.getPath())
                         .message(getMessage(exception))
+                        .requestId(headers.getHeaderString("X-REQUESTID"))
                         .build())
                 .build();
     }

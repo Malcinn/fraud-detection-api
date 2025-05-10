@@ -1,6 +1,7 @@
 package com.company.interfaces.rest.exception;
 
 import com.company.application.exception.MastercardBinLookupApiException;
+import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.Request;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
@@ -13,8 +14,8 @@ public class MastercardBinLookupApiExceptionHandler extends ExceptionHandler<Mas
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MastercardBinLookupApiExceptionHandler.class);
 
-    public MastercardBinLookupApiExceptionHandler(UriInfo uriInfo, Request request) {
-        super(uriInfo, request);
+    public MastercardBinLookupApiExceptionHandler(UriInfo uriInfo, Request request, HttpHeaders headers) {
+        super(uriInfo, request, headers);
     }
 
     @Override

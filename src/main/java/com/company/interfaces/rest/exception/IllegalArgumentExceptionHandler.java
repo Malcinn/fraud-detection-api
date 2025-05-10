@@ -1,5 +1,6 @@
 package com.company.interfaces.rest.exception;
 
+import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.Request;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
@@ -8,8 +9,8 @@ import jakarta.ws.rs.ext.Provider;
 @Provider
 public class IllegalArgumentExceptionHandler extends ExceptionHandler<IllegalArgumentException> {
 
-    public IllegalArgumentExceptionHandler(UriInfo uriInfo, Request request) {
-        super(uriInfo, request);
+    public IllegalArgumentExceptionHandler(UriInfo uriInfo, Request request, HttpHeaders headers) {
+        super(uriInfo, request, headers);
     }
 
     @Override
