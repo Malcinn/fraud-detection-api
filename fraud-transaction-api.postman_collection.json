@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fd421e35-4f3f-4bcc-b2e4-d9b973772792",
+		"_postman_id": "1670a7b2-526a-4c8b-abe5-98dc0445186a",
 		"name": "fraud-transaction-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "33300636"
@@ -9,9 +9,6 @@
 		{
 			"name": "transaction-assessment",
 			"request": {
-				"auth": {
-					"type": "noauth"
-				},
 				"method": "POST",
 				"header": [
 					{
@@ -49,9 +46,6 @@
 		{
 			"name": "bin-details-mastercard",
 			"request": {
-				"auth": {
-					"type": "noauth"
-				},
 				"method": "POST",
 				"header": [
 					{
@@ -89,9 +83,6 @@
 		{
 			"name": "synchronization",
 			"request": {
-				"auth": {
-					"type": "noauth"
-				},
 				"method": "POST",
 				"header": [
 					{
@@ -126,6 +117,90 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "tokenRequestParams",
+				"value": [
+					{
+						"key": "audience",
+						"value": "https://dev-jnj2o1avrwpw0e7z.eu.auth0.com/api/v2/",
+						"enabled": true,
+						"send_as": "request_body"
+					}
+				],
+				"type": "any"
+			},
+			{
+				"key": "tokenName",
+				"value": "fraud-app-token",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "client_credentials",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "https://dev-jnj2o1avrwpw0e7z.eu.auth0.com/oauth/token",
+				"type": "string"
+			},
+			{
+				"key": "useBrowser",
+				"value": false,
+				"type": "boolean"
+			},
+			{
+				"key": "clientSecret",
+				"value": "iWTioKz9-4n-S_xzS33RkrFp4rTSNjAiVytGMe0HfTXQjzxBHsvhOT_4EQd85MCr",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "gKr0Pux1TdYnVVmp8LDkdh3u0JmE4UPw",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
