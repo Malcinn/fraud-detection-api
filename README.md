@@ -6,6 +6,8 @@ Application perform transaction assessment base on:
 2. predefined risk assessment, different for each transaction type.
 
 ## How to use application
+First you have to obtain .evn file with sensitive credentials settings,
+then run following command in bash shell: ``export $(cat .env | xargs)`` </br>
 In order to start up application in development mode with live reload, use following command: ``./mvnw quarkus:dev`` </br>
 In the main directory you can find a postman collection with predefined api requests to communicate with service.
 1. /api/v1/fraud/transaction-assessment - perform transaction assessment
