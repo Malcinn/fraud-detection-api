@@ -8,7 +8,9 @@ Application perform transaction assessment base on:
 ## How to use application
 1. Before you start, please make sure that you received .evn file(with sensitive credentials data) and postman collection.
 2. Import environment variables (.env file) execute following command:  ``export $(cat .env | xargs)``
-3. Start up application in development mode with live reload, use following command: ``./mvnw quarkus:dev`` </br>
+3. Start up application:
+   1. development mode with live reload, use following command: ``./mvnw quarkus:dev`` </br>
+   2. production-like mode first build package: ``./mvnw clean install`` then run the jar file ``java -jar target/quarkus-app/quarkus-run.jar``
 
 Postman collection contains predefined api requests to communicate with service.
 1. /api/v1/fraud/transaction-assessment - perform transaction assessment
